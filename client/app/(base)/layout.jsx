@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function BaseAppLayout({ children }) {
 	return (
-		<html lang="en" className="bg-zinc-950">
+		<html lang="en" className="bg-white">
 			<head>
 				<link
 					rel="icon"
@@ -24,7 +24,7 @@ export default function BaseAppLayout({ children }) {
 			<body>
 
 					{children}
-					<Navbar />
+					
 			
 			</body>
 		</html>

@@ -15,7 +15,7 @@ const courseRoutes = require("./routes/courseRoutes");
 const app = express();
 
 // set allowed origins for CORS
-const allowedOrigins = ["http://localhost:3000", "http://localhost:8000"];
+const allowedOrigins = ["http://localhost:3000"];
 
 // middleware for the app
 app.use(express.json());
@@ -29,11 +29,13 @@ app.use(
 app.use("/students", studentRoutes);
 app.use("/courses", courseRoutes);
 
-console.log(`BACKEND SERVER STARTED IN ${config.get("Name")} ENVIRONMENT`);
+// console.log(`BACKEND SERVER STARTED IN ${config.get("Name")} ENVIRONMENT`);
 
 const port = process.env.PORT;
 
+
 app.listen(port, () => console.log(`Listening to Port ${port}`));
+
 
 
 module.exports = app;

@@ -1,8 +1,29 @@
-import Link from "next/link";
+'use client'
+
+import Link from "next/link"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 export default function Table(props) {
 
-    console.log(props, props.headers)
+
+    const router = useRouter()
+    const[studentData, setStudentData] = useState(props.students)
+
+
+    function handleDelete(index){
+        const updatedStudentData = studentData.filter((_, i) => i !== index);
+        setStudentData(updatedStudentData);
+
+        //async func to delete student data fr
+    }
+
+    function handleUpdate(id){
+        console.log(id)
+        router.push(`updateStudent/${id}`)
+    }
+
+    // console.log(props, props.headers)
     return (
         <>
             <div className="-my-2 py-2 lg:ml-64 pr-10 lg:px-8">
@@ -36,7 +57,7 @@ export default function Table(props) {
                         <tbody className="bg-white">
                            
                                 {/* Table rows */}
-                                {props.students?.map((student, i)=>( 
+                                {studentData?.map((student, i)=>( 
                               
                                 <tr key={i}>  
                                    
@@ -48,16 +69,16 @@ export default function Table(props) {
                                     <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{student.degree}</td>
                      
                                     <td className="px-6 py-4 whitespace-no-wrap text-right  text-sm leading-5">
-                                        <button className="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">Update</button>
+                                        <button onClick={(e) =>{handleUpdate(student.id)}}className="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">Update</button>
                                     </td>
                                     <td className="px-6 py-4 whitespace-no-wrap text-right  text-sm leading-5">
-                                        <button className="px-5 py-2 border-red-500 border text-red-500 rounded transition duration-300 hover:bg-red-700 hover:text-white focus:outline-none">Remove</button>
+                                        <button onClick={(e) => {handleDelete(i, student.id)}} className="px-5 py-2 border-red-500 border text-red-500 rounded transition duration-300 hover:bg-red-700 hover:text-white focus:outline-none">Remove</button>
                                     </td>
                                 </tr>
                              
                                 ))} 
 
-                    {props.courses?.map((course, i)=>(   
+                                {props.courses?.map((course, i)=>(   
                                 <tr key={i}>  
                                
                                     <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{course.name}</td>

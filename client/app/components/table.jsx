@@ -65,12 +65,7 @@ export default function Table(props) {
                                     <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{course.instructorName}</td>
                                     <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{course.count}</td>
                      
-                                    <td className="px-6 py-4 whitespace-no-wrap text-right  text-sm leading-5">
-                                        <button className="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">Update</button>
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-no-wrap text-right  text-sm leading-5">
-                                        <button className="px-5 py-2 border-red-500 border text-red-500 rounded transition duration-300 hover:bg-red-700 hover:text-white focus:outline-none">Remove</button>
-                                    </td>
+                    
                                 </tr>
                                 ))} 
  

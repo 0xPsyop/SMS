@@ -1,25 +1,45 @@
 'use client'
 
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 
 export default function Table(props) {
 
-
+    const [studentData, setStudentData] = useState([])
     const router = useRouter()
-    const[studentData, setStudentData] = useState(props.students)
 
+    useEffect(() => {
+        setStudentData(props.students)
+    }, [props.students])
+
+
+    async function handleDelete(index, studentId) {
+        try {
+            // Send DELETE request to the server
+            const response = await fetch(`http://localhost:3001/students/delete/${studentId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // You may pass additional data in the body if required
+            });
     
+            if (!response.ok) {
+                throw new Error('Failed to delete student');
+            }
+    
+            // If the request is successful, update the state locally
+            const updatedStudentData = studentData.filter((_, i) => i !== index);
+            setStudentData(updatedStudentData);
 
-    console.log(props.students)
-
-    function handleDelete(index){
-        const updatedStudentData = studentData.filter((_, i) => i !== index);
-        setStudentData(updatedStudentData);
-
-        //async func to delete student data fr
+            // Handle success if needed
+        } catch (error) {
+            console.error('Error deleting student:', error);
+            // Handle error
+        }
     }
+    
 
     function handleUpdate(id){
         console.log(id)

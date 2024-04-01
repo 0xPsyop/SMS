@@ -3,6 +3,7 @@
 import Navbar from "@/app/components/navbar"
 import { useRouter } from "next/navigation"
 import { useEffect,useState } from 'react';
+import PhoneInput from 'react-phone-number-input'
 
 
 export default function UpdateStudent({ params }){
@@ -14,7 +15,7 @@ export default function UpdateStudent({ params }){
     useEffect(() => {
         const fetchStudentData = async () => {
             try {
-                const student = await fetch(`http://localhost:3001/students/update/${params.id}`, {
+                const student = await fetch(`http://localhost:3001/students/${params.id}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -22,6 +23,7 @@ export default function UpdateStudent({ params }){
                 })
 
                 const response = await student.json();
+                console.log(response, "recieved ")
                 setStudentData(response); // Update the state with the fetched data
             } catch (error) {
                 console.error("Error fetching student data:", error);
@@ -53,6 +55,8 @@ export default function UpdateStudent({ params }){
         setDob(studentData.dob || '');
     }, [studentData])
 
+    console.log(studentData, "Student Data object")
+
     async function handleSubmit(e){
         e.preventDefault()
 
@@ -70,7 +74,7 @@ export default function UpdateStudent({ params }){
 
 
          // Send the data to the server
-    const response = await fetch("", {
+    const response = await fetch(`http://localhost:3001/students/update/${params.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -110,7 +114,7 @@ export default function UpdateStudent({ params }){
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                     <div className="md:col-span-5">
                         <label htmlFor="full_name">First Name</label>
-                        <input  value={firstName} onChange={(e) => setFirstName(e.target.value)} type="text" name="full_name" id="full_name" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                        <input  value={firstName} onChange={(e) => setFirstName(e.target.value)}  type="text" name="full_name" id="full_name" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
                     </div>
                     <div className="md:col-span-5">
                         <label htmlFor="full_name">Last  Name</label>
@@ -129,7 +133,7 @@ export default function UpdateStudent({ params }){
 
                     <div className="md:col-span-2">
                         <label htmlFor="city">Phone number</label>
-                        <input value={phone} onChange={(e) => setPhone(e.target.value)} type="text" name="city" id="city" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="" />
+                        <PhoneInput value={phone} onChange={setPhone} type="text" name="city" id="city" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="" />
                     </div>
                     
                     <div className="md:col-span-3">

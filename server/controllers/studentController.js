@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 
 const addStudent = async (req, res) => {
   try {
-    const { firstName, lastName, email, degree, phone, courses, dob } = req.body;
+    const { firstName, lastName, email, degree, phone, address, dob } = req.body;
 
     // Check if email already exists
     const existingStudent = await prisma.student.findUnique({
@@ -29,6 +29,7 @@ const addStudent = async (req, res) => {
         email,
         degree,
         phone,
+        address,
         dob,
       },
     });

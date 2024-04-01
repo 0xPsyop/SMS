@@ -19,6 +19,7 @@ model student {
   lastName         String
   email            String   @unique
   degree           String
+  address          String
   phone            String
   currentCourses   String[]
   completedCourses String[]

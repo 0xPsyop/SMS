@@ -6,7 +6,7 @@ import { useEffect,useState } from 'react';
 
 export default function Courses(){
 
-    const[courseData, setCourseData] = useState('null')
+    const[courseData, setCourseData] = useState([])
 
 
     useEffect(() => {
@@ -32,7 +32,7 @@ export default function Courses(){
 
 
     const headers= [
-        "Name", "CourseId", "Instructor Name", "Enrolled Students"
+       "CourseId",   "Name",  "Instructor Name", "Degree Name"
     ]
 
  

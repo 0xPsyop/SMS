@@ -8,13 +8,13 @@ import { useEffect,useState } from 'react';
 export default function UpdateStudent({ params }){
 
 
-    const[studentData, setStudentData] = useState('null')
+    const[studentData, setStudentData] = useState({})
 
 
     useEffect(() => {
         const fetchStudentData = async () => {
             try {
-                const student = await fetch("", {
+                const student = await fetch(`http://localhost:3001/students/update/${params.id}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -40,6 +40,18 @@ export default function UpdateStudent({ params }){
     const[phone, setPhone] = useState(studentData.phone)
     const[degree,setDegree] = useState(studentData.degree)
     const[dob,setDob] = useState(studentData.dob)
+
+
+    useEffect(() => {
+        // Populate input fields with fetched student data
+        setFirstName(studentData.firstName || '');
+        setLastName(studentData.lastName || '');
+        setEmail(studentData.email || '');
+        setAddress(studentData.address || '');
+        setPhone(studentData.phone || '');
+        setDegree(studentData.degree || '');
+        setDob(studentData.dob || '');
+    }, [studentData])
 
     async function handleSubmit(e){
         e.preventDefault()
@@ -89,7 +101,7 @@ export default function UpdateStudent({ params }){
             <div className="bg-white p-4 px-4 md:p-8 mb-6">
                 <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
                 <div className="text-gray-600">
-                    <p className="font-medium text-lg">Personal Details</p>
+                    <p className="font-medium text-lg">Update Student Details</p>
                     <p>Please change only the relevant fields.</p>
                 </div>
 

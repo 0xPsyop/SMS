@@ -12,7 +12,7 @@ export default function Courses(){
     useEffect(() => {
         const fetchCourseData = async () => {
             try {
-                const courses = await fetch("", {
+                const courses = await fetch("http://localhost:3001/courses/all", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -35,13 +35,11 @@ export default function Courses(){
         "Name", "CourseId", "Instructor Name", "Enrolled Students"
     ]
 
-    const courses =[
-        {name:"Manujaya", id:"0001", degree:"SE", email:"blahblah@gmail.com"}
-    ]
+ 
     return(
        <div className='flex'>
         <Navbar/>
-        <Table headers={headers} courses= {courses}/>
+        <Table headers={headers} courses= {courseData}/>
        </div>
     )
 }

@@ -42,7 +42,7 @@ export default function Table(props) {
     
 
     function handleUpdate(id){
-        console.log(id)
+        // console.log(id)
         router.push(`updateStudent/${id}`)
     }
 

@@ -7,12 +7,20 @@ import { useRouter } from "next/navigation"
 export default function Table(props) {
 
     const [studentData, setStudentData] = useState([])
+    const[courseData, setCourseData] = useState([])
     const router = useRouter()
 
     useEffect(() => {
         setStudentData(props.students)
     }, [props.students])
 
+
+    
+    useEffect(() => {
+        if (props.courses && props.courses.data) {
+            setCourseData(props.courses.data);
+        }
+    }, [props.courses])
 
     async function handleDelete(index, studentId) {
         try {
@@ -85,9 +93,9 @@ export default function Table(props) {
                                 <tr key={i}>  
                                    
                                     {console.log(student, "student")}
-                                    <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{<Link href={`/student/${student.id}`}> {student.firstName +" "+ student.lastName} </Link>}</td>
+                                    <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{<Link href={`/student/${student.id}`}>  {student.id} </Link>}</td>
                                    
-                                    <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{student.id}</td>
+                                    <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{student.firstName +" "+ student.lastName}</td>
                                     <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{student.email}</td>
                                     <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{student.degree}</td>
                      
@@ -101,14 +109,14 @@ export default function Table(props) {
                              
                                 ))} 
 
-                                {props.courses?.map((course, i)=>(   
+                                {courseData?.map((course, i)=>(   
                                 <tr key={i}>  
                                
-                                    <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{course.name}</td>
                                     <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{course.id}</td>
+                                    <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{course.name}</td>
                                     <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{course.instructorName}</td>
-                                    <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{course.count}</td>
-                     
+                                    <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{course.degree}</td>
+                   
                     
                                 </tr>
                                 ))} 

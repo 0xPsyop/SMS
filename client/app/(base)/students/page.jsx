@@ -7,7 +7,7 @@ import { useEffect,useState } from 'react';
 export default function Students(){
 
     const headers= [
-        "Name", "Student Id", "Email", "Degree"
+         "Student Id", "Name",  "Email", "Degree"
     ]
     
     const api = (process.env.API_URL)

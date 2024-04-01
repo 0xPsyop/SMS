@@ -10,6 +10,9 @@ export default function Table(props) {
     const router = useRouter()
     const[studentData, setStudentData] = useState(props.students)
 
+    
+
+    console.log(props.students)
 
     function handleDelete(index){
         const updatedStudentData = studentData.filter((_, i) => i !== index);
@@ -61,8 +64,8 @@ export default function Table(props) {
                               
                                 <tr key={i}>  
                                    
-                                    
-                                    <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{<Link href={`/student/${student.id}`}> {student.name} </Link>}</td>
+                                    {console.log(student, "student")}
+                                    <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{<Link href={`/student/${student.id}`}> {student.firstName +" "+ student.lastName} </Link>}</td>
                                    
                                     <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{student.id}</td>
                                     <td className="px-6 py-4 whitespace-no-wrap  text-blue-900  text-sm leading-5">{student.email}</td>

@@ -9,15 +9,16 @@ export default function Students(){
     const headers= [
         "Name", "Student Id", "Email", "Degree"
     ]
+    
+    const api = (process.env.API_URL)
 
-
-    const[studentData, setStudentData] = useState('null')
+    const[studentData, setStudentData] = useState([])
 
 
     useEffect(() => {
         const fetchStudentData = async () => {
             try {
-                const students = await fetch("", {
+                const students = await fetch(`http://localhost:3001/students/all`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -34,13 +35,13 @@ export default function Students(){
     }, []);
 
 
-    const students =[
-        {name:"Manujaya", id:"0001", degree:"SE", email:"blahblah@gmail.com"}
-    ]
+    // const students =[
+    //     {name:"Manujaya", id:"0001", degree:"SE", email:"blahblah@gmail.com"}
+    // ]
     return(
         <div className='flex'>
         <Navbar/>
-        <Table headers={headers} students= {students}/>
+        <Table headers={headers} students= {studentData}/>
        </div>
     )
 }

@@ -32,6 +32,7 @@ model course {
   id             String @id @default(cuid())
   name           String
   instructorName String
+  degree         String
 
   @@map("courses")
 }

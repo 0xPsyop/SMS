@@ -14,23 +14,23 @@ datasource db {
 }
 
 model student {
-  id        String   @id @default(cuid())
-  firstName String
-  lastName  String
-  email     String   @unique
-  degree    String
-  phone     Int
-  courses   String[]
-  dob       DateTime
+  id               String   @id @default(cuid())
+  firstName        String
+  lastName         String
+  email            String   @unique
+  degree           String
+  phone            Int
+  currentCourses   String[]
+  completedCourses String[]
+  dob              DateTime
 
   @@map("students")
 }
 
 model course {
-  id             String   @id @default(cuid())
+  id             String @id @default(cuid())
   name           String
   instructorName String
-  students       String[]
 
   @@map("courses")
 }

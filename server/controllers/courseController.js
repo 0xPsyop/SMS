@@ -1,5 +1,17 @@
-const { StudentModel } = require("../models/studentModel")
-const { CourseModel } = require("../models/courseModel")
 
 const asyncHandler = require("express-async-handler")
-const Joi = require("joi")
+
+
+const { PrismaClient } = require('@prisma/client');
+
+const prisma = new PrismaClient();
+
+// Controller function to get all courses
+const viewAllCourses = asyncHandler(async (req, res) => {
+    const courses = await CourseModel.find();
+    res.json(courses);
+});
+
+module.exports = {
+    viewAllCourses,
+};

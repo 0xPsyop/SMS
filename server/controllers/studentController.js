@@ -55,9 +55,10 @@ const getAllStudents = asyncHandler(async (req, res) => {
   // Controller function to get a single student by ID
 const getStudentById = asyncHandler(async (req, res) => {
     const { id } = req.params;
+    const studentId = parseInt(id)
     const student = await prisma.student.findUnique({
       where: {
-        id,
+        id: studentId,
       },
     });
   

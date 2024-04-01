@@ -29,7 +29,6 @@ const addStudent = async (req, res) => {
         email,
         degree,
         phone,
-        courses,
         dob,
       },
     });

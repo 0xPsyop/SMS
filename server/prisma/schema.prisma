@@ -19,10 +19,10 @@ model student {
   lastName         String
   email            String   @unique
   degree           String
-  phone            Int
+  phone            String
   currentCourses   String[]
   completedCourses String[]
-  dob              DateTime
+  dob              String
 
   @@map("students")
 }

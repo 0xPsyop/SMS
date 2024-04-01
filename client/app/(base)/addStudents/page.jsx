@@ -3,10 +3,13 @@
 import Navbar from "@/app/components/navbar"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 export default function AddStudents(){
 
 
+    console.log(process.env.API_URL)
     const router = useRouter()
 
     const[firstName, setFirstName]= useState("")
@@ -19,6 +22,8 @@ export default function AddStudents(){
 
     async function handleSubmit(e){
         e.preventDefault()
+
+       //setPhone(convertToISODateTime(phone))
 
         const studentData ={
             firstName:firstName,
@@ -44,7 +49,7 @@ export default function AddStudents(){
 
 
          // Send the data to the server
-    const response = await fetch("", {
+    const response = await fetch(`http://localhost:3001/students/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -60,6 +65,12 @@ export default function AddStudents(){
         console.log("Student adding failed")
       }
     }
+
+    function convertToISODateTime(dateString) {
+      const date = new Date(dateString);
+      const isoDateTime = date.toISOString();
+      return isoDateTime;
+  }
 
 
     return(  
@@ -103,7 +114,7 @@ export default function AddStudents(){
 
                     <div className="md:col-span-2">
                         <label htmlFor="city">Phone number</label>
-                        <input value={phone} onChange={(e) => setPhone(e.target.value)} type="text" name="city" id="city" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="" />
+                        <PhoneInput value={phone} onChange={setPhone} type="text" name="city" id="city" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="" />
                     </div>
                     
                     <div className="md:col-span-3">

@@ -18,9 +18,10 @@ export default function MiniTable(props) {
 
     async function handleRemove(courseId) {
         // Update studentData to remove the course ID from currentCourses and add it to completedCourses
+        let id = String(courseId)
         const updatedStudentData = {
-            currentCourses: studentData.currentCourses.filter(id => id !== courseId),
-            completedCourses: [...studentData.completedCourses, "courseId"]
+            currentCourses: studentData.currentCourses.filter(i => i !== id),
+            completedCourses: [...studentData.completedCourses, id]
         };
     
         try {
@@ -37,7 +38,7 @@ export default function MiniTable(props) {
                 console.log("Course completed successfully");
                 // Redirect to '/students' page after successful update
                 // router.push('/students');
-                setRemoveText("Removed")
+              
 
             } else {
                 console.log("Student update failed");

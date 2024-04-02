@@ -120,8 +120,8 @@ export default function student({ params }) {
        <div className=" lg:ml-64">
        <MiniTable headers={headers} title={titles[0]} courses={completedCourses}  />
       </div> 
-        <MiniTable headers={headers} title = {titles[1]} courses={currentCourses} removeBtn= {true} id={params.id}/>
-        <MiniTable headers={headers} title = {titles[2]} courses= {availableCourses} enrollBtn={true} id={params.id}/>
+        <MiniTable headers={headers} title = {titles[1]} courses={currentCourses} removeBtn= {true} id={params.id} student={studentData}/>
+        <MiniTable headers={headers} title = {titles[2]} courses= {availableCourses} enrollBtn={true} id={params.id} student={studentData}/>
        </div>
     )
 }

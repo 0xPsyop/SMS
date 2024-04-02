@@ -5,19 +5,22 @@ import { useEffect, useState } from 'react';
 export default function MiniTable(props) {
 
     const [courseData, setCourseData] = useState([])
+    const [studentData, setStudentData] = useState({})
+    const [removeText, setRemoveText] = useState("Remove")
+    const [enrollText, setEnrollText] = useState("Enroll")
 
 
     useEffect(() => {
         setCourseData(props.courses)
+        setStudentData(props.student)
         console.log(props, "props")
     }, [props.courses])
 
     async function handleRemove(courseId) {
         // Update studentData to remove the course ID from currentCourses and add it to completedCourses
         const updatedStudentData = {
-            ...studentData,
             currentCourses: studentData.currentCourses.filter(id => id !== courseId),
-            completedCourses: [...studentData.completedCourses, courseId]
+            completedCourses: [...studentData.completedCourses, "courseId"]
         };
     
         try {
@@ -34,6 +37,8 @@ export default function MiniTable(props) {
                 console.log("Course completed successfully");
                 // Redirect to '/students' page after successful update
                 // router.push('/students');
+                setRemoveText("Removed")
+
             } else {
                 console.log("Student update failed");
             }
@@ -45,9 +50,11 @@ export default function MiniTable(props) {
 
     async function handleEnroll(courseId) {
         // Update studentData to add the course ID to the currentCourses array
+        
+        
+
         const updatedStudentData = {
-            ...studentData,
-            currentCourses: [...studentData.currentCourses, courseId]
+         currentCourses: [...studentData.currentCourses,"courseId"],
         };
     
         try {
@@ -64,6 +71,7 @@ export default function MiniTable(props) {
                 console.log("Course enrolled successfully");
                 // Redirect to '/students' page after successful update
                 // router.push('/students');
+                setEnrollText("Enrolled")
             } else {
                 console.log("Course enroll failed");
             }
@@ -100,7 +108,7 @@ export default function MiniTable(props) {
                                     
                                     {props.removeBtn  && (
                                         <td className="px-6 py-4 whitespace-no-wrap text-right  text-sm leading-5">
-                                        <button onClick={(e) =>{handleRemove(course.id)}}className="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">Remove</button>
+                                        <button onClick={(e) =>{handleRemove(course.id)}}className={`px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none${removeText== "removed" && "text-white bg-blue-700" }`}>{removeText}</button>
                                         </td>
 
                                     ) }
@@ -108,7 +116,7 @@ export default function MiniTable(props) {
 
                                     {props.enrollBtn && (
                                          <td className="px-6 py-4 whitespace-no-wrap text-right  text-sm leading-5">
-                                         <button onClick={(e) =>{handleEnroll(course.id)}}className="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">Enroll</button>
+                                         <button onClick={(e) =>{handleEnroll(course.id)}}className="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">{enrollText}</button>
                                         </td>
 
                                     )}

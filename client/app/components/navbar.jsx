@@ -12,14 +12,12 @@ export default function Navbar(){
     const studentIcon = '../public/students.png'
     const addIcon = '../public/add.png'
     const logIcon = '../public/history.png'
-    const adminIcon= '../public/admin.png'
 
     const menus = [
         {icon:courseIcon, name: "Courses", route:"/courses" },
         {icon:studentIcon, name: "Students",route:"/students" },
         {icon:addIcon, name: "Add Students",route:"/addStudents" },
         {icon:logIcon, name: "History",route:"/history" },
-        {icon:adminIcon, name: "Change Admins",route:"/access" },
     ]
     return (
         <>   

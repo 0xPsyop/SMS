@@ -133,7 +133,7 @@ export default function UpdateStudent({ params }){
 
                     <div className="md:col-span-2">
                         <label htmlFor="city">Phone number</label>
-                        <PhoneInput value={phone} onChange={setPhone} type="text" name="city" id="city" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="" />
+                        <input value={phone} onChange={(e) => setPhone(e.target.value)} type="text" name="city" id="city" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="" />
                     </div>
                     
                     <div className="md:col-span-3">

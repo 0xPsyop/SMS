@@ -64,13 +64,16 @@ export default function student({ params }) {
         }
     
         // Extracting course IDs from completedCourses and currentCourses
-        const completedCourseIds = studentData.completedCourses;
-        const currentCourseIds = studentData.currentCourses;
+        const completedCourseIds = studentData.completedCourses.map(id => id.toString());
+        const currentCourseIds = studentData.currentCourses.map(id => id.toString());
     
         // Filtering courseData to get available courses
         return courseData.filter(course => {
+            // Convert course ID to string for comparison
+            const courseIdAsString = course.id.toString();
+    
             // Check if the course ID is not present in either completedCourses or currentCourses
-            return !completedCourseIds.includes(course.id) && !currentCourseIds.includes(course.id);
+            return !completedCourseIds.includes(courseIdAsString) && !currentCourseIds.includes(courseIdAsString);
         });
     };
     

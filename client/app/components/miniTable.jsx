@@ -50,11 +50,11 @@ export default function MiniTable(props) {
 
     async function handleEnroll(courseId) {
         // Update studentData to add the course ID to the currentCourses array
-        
-        
+        console.log(courseId, "courseId")
+        let id = String(courseId)
 
         const updatedStudentData = {
-         currentCourses: [...studentData.currentCourses,"courseId"],
+         currentCourses: [...studentData.currentCourses, id],
         };
     
         try {
@@ -70,8 +70,7 @@ export default function MiniTable(props) {
             if (response.ok) {
                 console.log("Course enrolled successfully");
                 // Redirect to '/students' page after successful update
-                // router.push('/students');
-                setEnrollText("Enrolled")
+                // router.push('/students')
             } else {
                 console.log("Course enroll failed");
             }
@@ -108,7 +107,7 @@ export default function MiniTable(props) {
                                     
                                     {props.removeBtn  && (
                                         <td className="px-6 py-4 whitespace-no-wrap text-right  text-sm leading-5">
-                                        <button onClick={(e) =>{handleRemove(course.id)}}className={`px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none${removeText== "removed" && "text-white bg-blue-700" }`}>{removeText}</button>
+                                        <button onClick={(e) =>{handleRemove(course.id)}}className="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">Remove</button>
                                         </td>
 
                                     ) }
@@ -116,7 +115,7 @@ export default function MiniTable(props) {
 
                                     {props.enrollBtn && (
                                          <td className="px-6 py-4 whitespace-no-wrap text-right  text-sm leading-5">
-                                         <button onClick={(e) =>{handleEnroll(course.id)}}className="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">{enrollText}</button>
+                                         <button onClick={(e) =>{handleEnroll(course.id)}}className="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">Enroll</button>
                                         </td>
 
                                     )}

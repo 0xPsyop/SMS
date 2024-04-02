@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 
 const addStudent = async (req, res) => {
   try {
-    const { firstName, lastName, email, degree, phone, address, dob } = req.body;
+    const { firstName, lastName, email, degree, phone, address, dob, completedCourses,currentCourses } = req.body;
 
     // Check if email already exists
     const existingStudent = await prisma.student.findUnique({
@@ -31,6 +31,8 @@ const addStudent = async (req, res) => {
         phone,
         address,
         dob,
+        currentCourses,
+        completedCourses
       },
     });
 
@@ -73,10 +75,10 @@ const getStudentById = asyncHandler(async (req, res) => {
   // Controller function to delete a student by ID
 const deleteStudentById = asyncHandler(async (req, res) => {
     const { id } = req.params;
-  
+    const studentId = parseInt(id)
     // Check if the student with the provided ID exists
     const existingStudent = await prisma.student.findUnique({
-      where: { id },
+      where: {id: studentId,},
     });
   
     // If the student doesn't exist, return a 404 error
@@ -102,11 +104,11 @@ const deleteStudentById = asyncHandler(async (req, res) => {
   //Controller function to update a student's details
   const updateStudentById = asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const { firstName, lastName, email, degree, phone, courses, dob } = req.body;
-  
+    const { firstName, lastName, email, degree, phone, courses, dob, completedCourses, currentCourses } = req.body;
+    const studentId = parseInt(id)
     // Check if the student with the provided ID exists
     const existingStudent = await prisma.student.findUnique({
-      where: { id },
+      where: { id: studentId },
     });
   
     // If the student doesn't exist, return a 404 error
@@ -117,7 +119,7 @@ const deleteStudentById = asyncHandler(async (req, res) => {
     try {
       // Update the student's details in the database
       const updatedStudent = await prisma.student.update({
-        where: { id },
+        where: { id: studentId },
         data: {
           firstName,
           lastName,
@@ -126,6 +128,8 @@ const deleteStudentById = asyncHandler(async (req, res) => {
           phone,
           courses,
           dob,
+         completedCourses, 
+         currentCourses, 
         },
       });
   
